@@ -7,9 +7,10 @@ export default function Texto({children}: any){
 
 const estilos = StyleSheet.create({
     estilos_textos : {
-        color: "navy",
+        color: "white",
         fontWeight: "bold",
         fontSize: 30,
         textAlign: "center",
+        fontFamily: "Arial",
     }
 });
