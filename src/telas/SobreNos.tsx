@@ -12,6 +12,7 @@ export default function SobreNos() {
     return <ScrollView style={estilos.fundo}>
         <StatusBar /> 
         <Image source={require('../../assets/logo.png')} style={estilos.logo} resizeMode="contain" />
+        <Texto style={estilos.titulo}>Conheça a nossa história</Texto>
         <Texto style={estilos.texto_sobre}>A hamburgueria ....... existe desde 19** e mantém sua tradição nos hamburguers até hoje.</Texto>
         <Image source={require('../../assets/hamberger.png')} style={estilos.img_sobre} resizeMode="contain"></Image>
         <VideoView player = {player} style = {estilos.video} allowsFullscreen allowsPictureInPicture/>
@@ -31,6 +32,11 @@ const estilos = StyleSheet.create({
     },
     texto_sobre:{
         color: "white",
+        fontWeight: "bold"
+
+    },
+    titulo:{
+        fontSize: 34,
     },
     img_sobre:{
         height: 400,
