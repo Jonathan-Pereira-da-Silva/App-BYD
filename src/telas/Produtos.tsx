@@ -12,10 +12,11 @@ export default function SobreNos() {
     return <ScrollView style={estilos.fundo}>
         <StatusBar /> 
         <Image source={require('../../assets/logo.png')} style={estilos.logo} resizeMode="contain" />
-        <Texto style={estilos}>Conheça a nossa história</Texto>
-        <Texto style={estilos.texto_sobre}>A hamburgueria ....... existe desde 19** e mantém sua tradição nos hamburguers até hoje.</Texto>
+        <Texto style={estilos.texto_sobre}>Nossos Produtos</Texto>
         <Image source={require('../../assets/hamberger.png')} style={estilos.img_sobre} resizeMode="contain"></Image>
-        <VideoView player = {player} style = {estilos.video} allowsFullscreen allowsPictureInPicture/>
+        <Texto style={estilos.texto_sobre}>X-Tudo </Texto>
+        <Image source={require('../../assets/hamberger.png')} style={estilos.img_sobre} resizeMode="contain"></Image>
+        <Texto style={estilos.texto_sobre}>X-Tudo </Texto>
     </ScrollView>
 }
 
@@ -29,11 +30,12 @@ const estilos = StyleSheet.create({
         width: 200,
         height: 200,
         alignSelf: "center",
+        marginBottom: 30,
     },
     texto_sobre:{
         color: "white",
-        fontWeight: "bold"
-
+        fontWeight: "bold",
+        textAlign: "center",
     },
     titulo:{
         fontSize: 34,
@@ -41,11 +43,5 @@ const estilos = StyleSheet.create({
     img_sobre:{
         height: 400,
         alignSelf: "center",
-    },
-    video:{
-        width: 350,
-        height:275,
-        alignSelf: "center",
-        marginBottom: 30,
     }
 })
