@@ -7,7 +7,7 @@ import Texto from "../componentes/Texto";
 export default function SobreNos() {
 
     // Indica o video e coloca ele em loop
-    const player = useVideoPlayer('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')
+    const player = useVideoPlayer('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
 
     return <ScrollView style={estilos.fundo}>
         <StatusBar /> 

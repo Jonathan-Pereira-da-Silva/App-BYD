@@ -5,9 +5,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"; 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SobreNos from "./src/telas/SobreNos"; 
-import Produtos from "./src/telas/Produtos"; 
-import ListaDeDesejos from "./src/telas/ListaDeDesejos"; 
-import Perfil from "./src/telas/Perfil"; 
+import Produto from "./src/telas/Produtos";
+import MockProdutos from "./src/mocks/listaProduto";
+function  MenuProdutos(){
+  return <Produto {...MockProdutos}/>
+}
 // Configuração do Menu
 const Tab = createBottomTabNavigator();
 function Menu(){
@@ -38,9 +40,9 @@ function Menu(){
               headerShown: false,                
             })}>
             <Tab.Screen name="Sobre Nós" component={SobreNos}/>
-            <Tab.Screen name="Produtos" component={Produtos}/>
-            <Tab.Screen name="Lista de Desejos" component={ListaDeDesejos}/>
-            <Tab.Screen name="Perfil" component={Perfil}/>
+            <Tab.Screen name="Produtos" component={MenuProdutos}/>
+            <Tab.Screen name="Lista de Desejos" component={SobreNos}/>
+            <Tab.Screen name="Perfil" component={SobreNos}/>
         </Tab.Navigator>
 }
 export default function App() {
