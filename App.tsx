@@ -15,15 +15,15 @@ const Tab = createBottomTabNavigator();
 function Menu(){
   return <Tab.Navigator screenOptions={({route}) => ({
               tabBarIcon: ({focused, color, size}) => {
-                let iconName;
+                let iconName: string;
                 if(route.name === "Sobre Nós"){
                   iconName = focused
                   ? 'home'
                   : 'home-outline'
                 }else if(route.name === "Produtos"){
                   iconName = focused
-                  ? 'fast-food'
-                  : 'fast-food-outline'
+                  ? 'car-sport'
+                  : 'car-sport-outline'
                 }else if(route.name === "Lista de Desejos"){
                   iconName = focused
                   ? 'list'
@@ -48,12 +48,8 @@ function Menu(){
 export default function App() {
   // Configuração da fonte para o app
   const [fonteCarregada] = useFonts({"FonteRegular": Montserrat_400Regular, "FonteNegrito": Montserrat_700Bold});
-  const [titulo] = useFonts({"Titulo": require('./assets/Honk-Regular-VariableFont_MORF,SHLN.ttf')})
   // Verifica se a fonte foi carregada, se não, não exibe nada
   if(!fonteCarregada){
-    return <View/>
-  }
-  if(!titulo){
     return <View/>
   }
   return <NavigationContainer>
