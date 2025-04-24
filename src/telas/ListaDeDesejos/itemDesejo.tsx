@@ -1,39 +1,25 @@
-import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 import Texto from "../../componentes/Texto";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ListaDesejosContext } from "../../../App"; // Ajuste o caminho conforme a sua estrutura
+import { ListaDesejosContext } from "../../../App";
 
-export default function Item({ item: { id, nome, descricao, imagem } }: any) {
-    const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
-    const [isDesejado, setIsDesejado] = useState(false);
+export default function ItemDesejo({ item: { id, nome, descricao, imagem } }: any) {
+    const { removerDesejo } = useContext(ListaDesejosContext);
 
-    useEffect(() => {
-        setIsDesejado(listaDesejos.includes(id));
-    }, [listaDesejos, id]);
-
-    const handleAdicionarRemoverDesejo = () => {
-        if (isDesejado) {
-            removerDesejo(id);
-        } else {
-            adicionarDesejo(id);
-        }
-        setIsDesejado(!isDesejado);
+    const handleRemoverDesejo = () => {
+        removerDesejo(id);
     };
 
     return (
-        <View>
+        <View style={estilos.container}>
             <Card mode="elevated">
                 <Card.Content style={estilos.fundo}>
                     <View style={estilos.headerCard}>
                         <Texto style={estilos.titulo}>{nome}</Texto>
-                        <TouchableOpacity onPress={handleAdicionarRemoverDesejo}>
-                            <Ionicons
-                                name={isDesejado ? "heart" : "heart-outline"}
-                                size={24}
-                                color={isDesejado ? "#FF0000" : "#C6C8C7"}
-                            />
+                        <TouchableOpacity onPress={handleRemoverDesejo}>
+                            <Ionicons name="heart-dislike-outline" size={24} color="#ff6347" />
                         </TouchableOpacity>
                     </View>
                     <Texto style={estilos.texto_item}>{descricao}</Texto>
@@ -45,6 +31,9 @@ export default function Item({ item: { id, nome, descricao, imagem } }: any) {
 }
 
 const estilos = StyleSheet.create({
+    container: {
+        marginBottom: 16,
+    },
     fundo: {
         backgroundColor: "#252728",
     },
