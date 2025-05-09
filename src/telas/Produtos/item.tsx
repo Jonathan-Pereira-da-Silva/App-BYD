@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Modal, TouchableOpacity, Image } from "react-native";
 import { Card } from "react-native-paper";
 import Texto from "../../componentes/Texto";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import { ListaDesejosContext } from "../../../App"; // Ajuste o caminho conforme
 export default function Item({ item: { id, nome, descricao, imagem } }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
     const [isDesejado, setIsDesejado] = useState(false);
+    const [statusModal, acaoAbreFecha] = useState(false);
 
     useEffect(() => {
         setIsDesejado(listaDesejos.includes(id));
@@ -27,19 +28,43 @@ export default function Item({ item: { id, nome, descricao, imagem } }: any) {
             <Card mode="elevated">
                 <Card.Content style={estilos.fundo}>
                     <View style={estilos.headerCard}>
-                        <Texto style={estilos.titulo}>{nome}</Texto>
-                        <TouchableOpacity onPress={handleAdicionarRemoverDesejo}>
-                            <Ionicons
-                                name={isDesejado ? "heart" : "heart-outline"}
-                                size={24}
-                                color={isDesejado ? "#FF0000" : "#C6C8C7"}
-                            />
-                        </TouchableOpacity>
+                        <View>
+                            <Texto style={estilos.titulo}>{nome}</Texto>
+                            <Texto style={estilos.texto_item}>{descricao}</Texto>
+                        </View>
+                        <View style={estilos.viewIcons}>
+                            <TouchableOpacity onPress={handleAdicionarRemoverDesejo}>
+                                <Ionicons
+                                    name={isDesejado ? "heart" : "heart-outline"}
+                                    size={24}
+                                    color={isDesejado ? "#FF0000" : "#C6C8C7"}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={()=>acaoAbreFecha(true)}>
+                                <Ionicons 
+                                    name="list"
+                                    size={24}
+                                    color="white"
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <Texto style={estilos.texto_item}>{descricao}</Texto>
+                    
                 </Card.Content>
                 <Card.Cover source={imagem} />
             </Card>
+            <Modal animationType="fade" transparent={true} visible={statusModal}>
+                <View style={estilos.modalContainer}>
+                    <View style={estilos.modal}>
+                        <Texto style={estilos.nomeProduto}>{nome}</Texto>
+                        <Texto style={estilos.descProduto}>{descricao}</Texto>
+                        <Image source={imagem} style={estilos.imagemModal} resizeMode="contain"></Image>
+                        <TouchableOpacity style={estilos.botao} onPress={()=>acaoAbreFecha(false)}>
+                            <Ionicons name="close" size={30} color="white"/>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -49,20 +74,52 @@ const estilos = StyleSheet.create({
         backgroundColor: "#252728",
     },
     headerCard: {
-        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 30,
-        marginBottom: 10, // Adicione um pouco de espaço abaixo do header
+        paddingBottom: 5,
+        flexDirection: 'row',
+    },
+    viewIcons: {
+        width: 22,
     },
     texto_item: {
         color: "#C6C8C7",
-        fontSize: 18,
-        marginBottom: 16
+        fontSize: 18,        
     },
     titulo: {
         fontSize: 25,
         color: "#C6C8C7",
-        flexShrink: 1, // Para que o título não quebre a linha inesperadamente
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modal: {
+        backgroundColor: "#000000",
+        borderRadius: 50,
+    },
+    nomeProduto: {
+        color: "#C6C8C7",
+        fontSize: 25,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginTop: 20
+    },
+    descProduto: {
+        color: "#C6C8C7",
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    imagemModal: {
+        maxWidth: 400,
+        height: 300,
+        alignSelf: "center"
+    },
+    botao: {
+        left: 180,
+        bottom: 20
     },
 });
