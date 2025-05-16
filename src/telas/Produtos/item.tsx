@@ -3,9 +3,10 @@ import { View, StyleSheet, Modal, TouchableOpacity, Image } from "react-native";
 import { Card } from "react-native-paper";
 import Texto from "../../componentes/Texto";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ListaDesejosContext } from "../../../App"; // Ajuste o caminho conforme a sua estrutura
+import PagerView from "react-native-pager-view";
+import { ListaDesejosContext } from "../../../App";
 
-export default function Item({ item: { id, nome, descricao, imagem } }: any) {
+export default function Item({ item: { id, nome, descricao, imagem, slider } }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
     const [isDesejado, setIsDesejado] = useState(false);
     const [statusModal, acaoAbreFecha] = useState(false);
@@ -49,16 +50,22 @@ export default function Item({ item: { id, nome, descricao, imagem } }: any) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    
                 </Card.Content>
-                <Card.Cover source={imagem} />
+                <Card.Cover style={estilos.imagem} source={imagem} />
             </Card>
             <Modal animationType="fade" transparent={true} visible={statusModal}>
                 <View style={estilos.modalContainer}>
                     <View style={estilos.modal}>
                         <Texto style={estilos.nomeProduto}>{nome}</Texto>
                         <Texto style={estilos.descProduto}>{descricao}</Texto>
-                        <Image source={imagem} style={estilos.imagemModal} resizeMode="contain"></Image>
+                        <PagerView initialPage={0} style={estilos.slider}>
+                            {/*<Image source={imagem} style={estilosTelaProduto.imagemModalTelaProduto} resizeMode="contain" />*/
+                            slider.map((img:any, index:any)=> (
+                                <View key={index}>
+                                    <Image source={img} style={estilos.imagemModal} resizeMode="contain"/>
+                                </View>
+                            ))}
+                        </PagerView>
                         <TouchableOpacity style={estilos.botao} onPress={()=>acaoAbreFecha(false)}>
                             <Ionicons name="close" size={30} color="white"/>
                         </TouchableOpacity>
@@ -116,7 +123,16 @@ const estilos = StyleSheet.create({
     imagemModal: {
         maxWidth: 400,
         height: 300,
-        alignSelf: "center"
+    },
+    imagem:{
+        maxWidth: 400,
+        height: 200,
+    },
+    slider: {
+        width: 400,
+        height: 320,
+        justifyContent: "center",
+        alignItems: "center",
     },
     botao: {
         left: 180,
