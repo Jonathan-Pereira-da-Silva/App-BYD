@@ -9,9 +9,39 @@ const lista_produto = {
                 descricao: "Por apenas R$ 118.800,00",
                 imagem: require('../../assets/produtos/mini.jpg'),
                 slider: [
-                    require('../../assets/produtos/mini.jpg'),
-                    require('../../assets/produtos/mini.jpg'),
-                    require('../../assets/produtos/mini.jpg'),
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/frente.webp'),
+                        texto: "O Novo Membro da Família Dolphin",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/45.webp'),
+                        texto: "Economia e Comodidade",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/lado.webp'),
+                        texto: "Segurança",
+                    },
+                    
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/airbags.jpg'),
+                        texto: "6 Airbags",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/interior.webp'),
+                        texto: "Tela Giratória de 10.1’’",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/indução.jpg'),
+                        texto: "Carregador por Indução",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/controle.jpg'),
+                        texto: "Teclas de Controle",
+                    },
+                    {
+                        imagem: require('../../assets/produtos/mini_dolphin/plataforma.webp'),
+                        texto: "e-Platform 3.0",
+                    },
                 ],
             },
             {

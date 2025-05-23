@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import PagerView from "react-native-pager-view";
 import { ListaDesejosContext } from "../../../App";
 
-export default function Item({ item: { id, nome, descricao, imagem, slider } }: any) {
+export default function Item({ item: { id, nome, descricao, imagem, slider, sliderTexto } }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
     const [isDesejado, setIsDesejado] = useState(false);
     const [statusModal, acaoAbreFecha] = useState(false);
@@ -59,12 +59,14 @@ export default function Item({ item: { id, nome, descricao, imagem, slider } }: 
                         <Texto style={estilos.nomeProduto}>{nome}</Texto>
                         <Texto style={estilos.descProduto}>{descricao}</Texto>
                         <PagerView initialPage={0} style={estilos.slider}>
-                            {/*<Image source={imagem} style={estilosTelaProduto.imagemModalTelaProduto} resizeMode="contain" />*/
-                            slider.map((img:any, index:any)=> (
-                                <View key={index}>
-                                    <Image source={img} style={estilos.imagemModal} resizeMode="contain"/>
-                                </View>
-                            ))}
+                            {
+                                slider.map((item:any, index:any)=> (
+                                    <View key={index}>
+                                        <Image source={item.imagem} style={estilos.imagemModal} resizeMode="contain"/>
+                                        <Texto style={estilos.descricao}>{item.texto}</Texto>
+                                    </View>
+                                ))
+                            }
                         </PagerView>
                         <TouchableOpacity style={estilos.botao} onPress={()=>acaoAbreFecha(false)}>
                             <Ionicons name="close" size={30} color="white"/>
@@ -135,7 +137,15 @@ const estilos = StyleSheet.create({
         alignItems: "center",
     },
     botao: {
-        left: 180,
-        bottom: 20
+        left: 160,
+        padding: 20,
+    },
+    descricao: {
+        color: "#C6C8C7",
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginTop: -20,
+        lineHeight: 25,
     },
 });

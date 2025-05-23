@@ -8,6 +8,7 @@ import SobreNos from "./src/telas/SobreNos";
 import Produto from "./src/telas/Produtos";
 import MockProdutos from "./src/mocks/listaProduto";
 import ListaDeDesejos from "./src/telas/ListaDeDesejos";
+import Perfil from "./src/telas/Perfil";
 
 // Criação do contexto da lista de desejos
 export const ListaDesejosContext = createContext<{
@@ -68,7 +69,7 @@ function Menu() {
                 <Tab.Screen name="Sobre Nós" component={SobreNos} />
                 <Tab.Screen name="Produtos" component={MenuProdutos} />
                 <Tab.Screen name="Lista de Desejos" component={ListaDeDesejosScreen} />
-                <Tab.Screen name="Perfil" component={SobreNos} />
+                <Tab.Screen name="Perfil" component={Perfil} />
             </Tab.Navigator>
         </ListaDesejosContext.Provider>
     );
