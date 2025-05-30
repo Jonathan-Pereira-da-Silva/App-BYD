@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import PagerView from "react-native-pager-view";
 import { ListaDesejosContext } from "../../../App";
 
-export default function Item({ item: { id, nome, descricao, imagem, slider, sliderTexto } }: any) {
+export default function Item({ item: { id, nome, descricao, imagem, slider} }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
     const [isDesejado, setIsDesejado] = useState(false);
     const [statusModal, acaoAbreFecha] = useState(false);
@@ -77,7 +77,6 @@ export default function Item({ item: { id, nome, descricao, imagem, slider, slid
         </View>
     );
 }
-
 const estilos = StyleSheet.create({
     fundo: {
         backgroundColor: "#252728",
@@ -145,7 +144,7 @@ const estilos = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        marginTop: -20,
+        marginTop: -32,
         lineHeight: 25,
     },
 });

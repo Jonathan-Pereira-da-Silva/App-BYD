@@ -61,7 +61,7 @@ function Menu() {
                         }
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
-                    tabBarActiveTintColor: 'purple',
+                    tabBarActiveTintColor: '#252728',
                     tabBarInactiveTintColor: 'gray',
                     headerShown: false,
                 })}
