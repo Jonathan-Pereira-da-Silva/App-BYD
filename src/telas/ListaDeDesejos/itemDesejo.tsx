@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 import Texto from "../../componentes/Texto";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ListaDesejosContext } from "../../../App";
+import { ListaDesejosContext } from "../ListaDeDesejos/Context";
 
 export default function ItemDesejo({ item: { id, nome, descricao, imagem } }: any) {
     const { removerDesejo } = useContext(ListaDesejosContext);

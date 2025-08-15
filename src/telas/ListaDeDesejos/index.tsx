@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, FlatList, StyleSheet, Image } from "react-native";
 import Texto from "../../componentes/Texto";
-import { ListaDesejosContext } from "../../../App";
+import { ListaDesejosContext } from "../ListaDeDesejos/Context";
 import MockProdutos from "../../mocks/listaProduto";
 import ItemDesejo from "./itemDesejo";
 

@@ -19,18 +19,16 @@ logo: {
     margin: -80,
 },
 fotoTiradaContainer: {
-    width: 200,
-    height: 200,
     alignSelf: 'center',
     borderRadius: '10',
     marginBottom: 10,
 },
 camera: {
-    width: '80%',
-    height: '30%',
+    width: 300,
+    height: 300,
     alignSelf: 'center',
     borderRadius: '10',
-    margin: 20,
+    marginBottom: 20,
 },
 cameraContainer: {
     flex: 1,
@@ -49,7 +47,6 @@ cameraBotao: {
 },
 cameraTexto: {
     fontSize: 20,
-    marginBottom: 5,
     color: 'white',
     alignContent: 'center',
 },

@@ -4,7 +4,7 @@ import { Card } from "react-native-paper";
 import Texto from "../../componentes/Texto";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PagerView from "react-native-pager-view";
-import { ListaDesejosContext } from "../../../App";
+import { ListaDesejosContext } from "../ListaDeDesejos/Context";
 
 export default function Item({ item: { id, nome, descricao, imagem, slider} }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);

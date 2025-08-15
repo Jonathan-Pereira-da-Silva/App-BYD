@@ -33,15 +33,29 @@ export default function Index(){
         setFacing(current=>(current === 'back' ? 'front' : 'back'));
     }
 
-    return <View style={estilosPerfil.container}>
-        <Image source={require('../../../assets/logo/logo.png')} style={estilosPerfil.logo} resizeMode="contain" />
-        <CameraView facing={facing} style={estilosPerfil.camera}>
-            <View style={estilosPerfil.cameraContainer}>
-                <TouchableOpacity style={estilosPerfil.cameraVirarBotao} onPress={toggleCameraFacing}>
-                    <Ionicons name="reload" size={30} color="#C6C8C7"></Ionicons>
-                </TouchableOpacity>
-            </View>
-        </CameraView>
+    return (
+    <View style={estilosPerfil.container}>
+        <Image 
+            source={require('../../../assets/logo/logo.png')} 
+            style={estilosPerfil.logo} 
+            resizeMode="contain" 
+        />
+
+        <View style={{ position: 'relative' }}>
+            <CameraView 
+                facing={facing} 
+                style={estilosPerfil.camera} 
+            />
+
+            {/* Botão sobreposto */}
+            <TouchableOpacity 
+                style={[estilosPerfil.cameraVirarBotao, { position: 'absolute', bottom: 20, right: 20 }]} 
+                onPress={toggleCameraFacing}
+            >
+                <Ionicons name="reload" size={30} color="#C6C8C7" />
+            </TouchableOpacity>
+        </View>
+
         <Card mode='elevated' style={estilosPerfil.cardContainer}>
             <Card.Content>
                 <Texto style={estilosPerfil.text}>Nome completo</Texto>
@@ -55,4 +69,5 @@ export default function Index(){
             </Card.Content>
         </Card>
     </View>
+);
 }
