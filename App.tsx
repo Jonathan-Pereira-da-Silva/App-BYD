@@ -25,11 +25,14 @@ function MenuAudio(){
     const audioSource = require('./assets/acdc_highway_to_hell.mp3');
     const player = useAudioPlayer(audioSource);
     
-    //Configura o controle liga/desliga
     const onOff = () => {
-        if(player.playing){
+        if (player.playing) {
             player.pause();
         } else {
+            // Se o áudio terminou (currentTime >= duration), reiniciar
+            if (player.currentTime >= player.duration) {
+                player.seekTo(0);
+            }
             player.play();
         }
     }
@@ -42,8 +45,6 @@ function MenuAudio(){
 // Configuração do Menu
 const Tab = createBottomTabNavigator();
 function Menu() {
-    const [listaDesejos, setListaDesejos] = useState<number[]>([]);
-
     return (<Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {

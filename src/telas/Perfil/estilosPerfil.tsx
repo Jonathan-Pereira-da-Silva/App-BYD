@@ -83,6 +83,23 @@ button: {
     alignSelf: 'flex-end',
     alignItems: 'center',
 },
+botao: {
+    width: '50%',
+    backgroundColor: '#252728',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 2,
+    paddingBottom: 5,
+    marginRight: '25%',
+    justifyContent: 'center',
+    alignItems: 'center',
+},
+textoBotao: {
+    width: '100%',
+    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+},
 });
 
 export default estilosPerfil;
