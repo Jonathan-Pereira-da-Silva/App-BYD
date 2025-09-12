@@ -8,8 +8,8 @@ import { ListaDesejosContext } from "../ListaDeDesejos/Context";
 
 export default function Item({ item: { id, nome, descricao, imagem, slider} }: any) {
     const { listaDesejos, adicionarDesejo, removerDesejo } = useContext(ListaDesejosContext);
-    const [isDesejado, setIsDesejado] = useState(false);
     const [statusModal, acaoAbreFecha] = useState(false);
+    const [isDesejado, setIsDesejado] = useState(false);
 
     useEffect(() => {
         setIsDesejado(listaDesejos.includes(id));

@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState} from "react";
 import {Card} from 'react-native-paper';
-import { View, TextInput, TouchableOpacity, Image, Alert, ScrollView } from "react-native";
+import { View, TextInput, TouchableOpacity, Image, Alert, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -62,47 +62,49 @@ export default function Index(){
     }
 
     return (
-    <ScrollView contentContainerStyle={estilosPerfil.container}>
-        <Image 
-            source={require('../../../assets/logo/logo.png')} 
-            style={estilosPerfil.logo} 
-            resizeMode="contain" 
-        />
-
-        <View style={{ position: 'relative' }}>
-            <CameraView 
-                facing={facing} 
-                style={estilosPerfil.camera} 
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView contentContainerStyle={[{flexGrow: 1},estilosPerfil.container]}>
+            <Image 
+                source={require('../../../assets/logo/logo.png')} 
+                style={estilosPerfil.logo} 
+                resizeMode="contain" 
             />
 
-            {/* Botão sobreposto */}
-            <TouchableOpacity 
-                style={[estilosPerfil.cameraVirarBotao, { position: 'absolute', bottom: 20, right: 20 }]} 
-                onPress={toggleCameraFacing}
-            >
-                <Ionicons name="reload" size={30} color="#C6C8C7" />
-            </TouchableOpacity>
-        </View>
+            <View style={{ position: 'relative' }}>
+                <CameraView 
+                    facing={facing} 
+                    style={estilosPerfil.camera} 
+                />
 
-        <Card mode='elevated' style={estilosPerfil.cardContainer}>
-            <Card.Content>
-                <Texto style={estilosPerfil.text}>Nome completo</Texto>
-                <TextInput style={estilosPerfil.input} value={nome} onChangeText={setNome}/>
-                
-                <Texto style={estilosPerfil.text}>E-Mail</Texto>
-                <TextInput style={estilosPerfil.input} value={email} onChangeText={setEmail}/>
-
-                <Texto style={estilosPerfil.text}>WhatsApp</Texto>
-                <TextInput style={estilosPerfil.input} value={whatsapp} onChangeText={setWhatsapp}/>
-            </Card.Content>
-            <Card.Actions>
-                <TouchableOpacity style={estilosPerfil.botao} onPress={salvarPerfil}>
-                    <Texto style={estilosPerfil.textoBotao}>
-                        <Ionicons name="save" size={20} color="#C6C8C7"/>Salvar Dados
-                    </Texto>
+                {/* Botão sobreposto */}
+                <TouchableOpacity 
+                    style={[estilosPerfil.cameraVirarBotao, { position: 'absolute', bottom: -8, right: 20 }]} 
+                    onPress={toggleCameraFacing}
+                >
+                    <Ionicons name="reload" size={30} color="#C6C8C7" />
                 </TouchableOpacity>
-            </Card.Actions>
-        </Card>
-    </ScrollView>
+            </View>
+
+            <Card mode='elevated' style={estilosPerfil.cardContainer}>
+                <Card.Content>
+                    <Texto style={estilosPerfil.text}>Nome completo</Texto>
+                    <TextInput style={estilosPerfil.input} value={nome} onChangeText={setNome}/>
+                    
+                    <Texto style={estilosPerfil.text}>E-Mail</Texto>
+                    <TextInput style={estilosPerfil.input} value={email} onChangeText={setEmail}/>
+
+                    <Texto style={estilosPerfil.text}>WhatsApp</Texto>
+                    <TextInput style={estilosPerfil.input} value={whatsapp} onChangeText={setWhatsapp}/>
+                </Card.Content>
+                <Card.Actions>
+                    <TouchableOpacity style={estilosPerfil.botao} onPress={salvarPerfil}>
+                        <Texto style={estilosPerfil.textoBotao}>
+                            <Ionicons name="save" size={20} color="#C6C8C7"/>Salvar Dados
+                        </Texto>
+                    </TouchableOpacity>
+                </Card.Actions>
+            </Card>
+        </ScrollView>
+    </KeyboardAvoidingView>
 );
 }

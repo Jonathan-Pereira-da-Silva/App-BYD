@@ -13,10 +13,12 @@ cardContainer: {
     alignSelf: 'center',
 },
 logo: {
+    position: 'absolute',
+    top: 0,
     width: 300,
     height: 300,
     alignSelf: "center",
-    margin: -80,
+    marginVertical: -60,
 },
 fotoTiradaContainer: {
     alignSelf: 'center',
@@ -25,10 +27,10 @@ fotoTiradaContainer: {
 },
 camera: {
     width: 300,
-    height: 300,
+    height: 200,
     alignSelf: 'center',
     borderRadius: '10',
-    marginBottom: 20,
+    marginVertical: 30,
 },
 cameraContainer: {
     flex: 1,

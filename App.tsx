@@ -12,6 +12,7 @@ import ListaDeDesejos from "./src/telas/ListaDeDesejos";
 import Perfil from "./src/telas/Perfil";
 import Texto from "./src/componentes/Texto";
 import Styles from "./src/telas/estiloGeral";
+import { ListaDesejosProvider } from "./src/telas/ListaDeDesejos/Context";
 
 function MenuProdutos() {
     return <Produto {...MockProdutos} />;
@@ -82,7 +83,9 @@ export default function App() {
     }
     return (
         <NavigationContainer>
-            <Menu />
+            <ListaDesejosProvider>
+                <Menu />
+            </ListaDesejosProvider>
             <MenuAudio/>
         </NavigationContainer>
     );
