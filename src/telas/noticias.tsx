@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  Modal,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Linking,
-} from "react-native";
+import {  View, Text, FlatList, TouchableOpacity, ActivityIndicator, Modal, StyleSheet, Image, ScrollView, Linking } from "react-native";
 import Texto from "../componentes/Texto";
 
 interface Noticia {
@@ -80,6 +69,7 @@ export default function Noticias() {
 
   return (
     <View style={styles.container}>
+      <Texto style={styles.titulo}>Notícias</Texto>
       <FlatList
         data={noticias}
         keyExtractor={(item, index) => index.toString()}
@@ -88,7 +78,6 @@ export default function Noticias() {
             style={styles.card}
             onPress={() => setSelectedNoticia(item)}
           >
-            <Texto style={styles.titulo}>Notícias</Texto>
             {item.imageUrl && (
               <Image
                 source={{ uri: item.imageUrl }}
