@@ -9,6 +9,7 @@ import SobreNos from "./src/telas/SobreNos";
 import Produto from "./src/telas/Produtos";
 import MockProdutos from "./src/mocks/listaProduto";
 import ListaDeDesejos from "./src/telas/ListaDeDesejos";
+import ListaEncomendas from "./src/telas/ListaEncomendas";
 import Perfil from "./src/telas/Perfil";
 import Noticias from "./src/telas/noticias";
 import Texto from "./src/componentes/Texto";
@@ -21,6 +22,10 @@ function MenuProdutos() {
 
 function ListaDeDesejosScreen() {
     return <ListaDeDesejos />;
+}
+
+function ListaEncomendasScreen() {
+    return <ListaEncomendas {...MockProdutos}/>;
 }
 
 function MenuAudio(){
@@ -61,6 +66,8 @@ function Menu() {
                             iconName = focused ? 'person-circle' : 'person-circle-outline';
                         } else if (route.name === "Notícias") {
                             iconName = focused ? "newspaper" : "newspaper-outline";
+                        }else if (route.name === "Encomendas") {
+                            iconName = focused ? "cart" : "cart-outline";
                         }
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
@@ -72,6 +79,7 @@ function Menu() {
                 <Tab.Screen name="Sobre Nós" component={SobreNos} />
                 <Tab.Screen name="Produtos" component={MenuProdutos} />
                 <Tab.Screen name="Lista de Desejos" component={ListaDeDesejosScreen} />
+                <Tab.Screen name="Encomendas" component={ListaEncomendasScreen} />
                 <Tab.Screen name="Perfil" component={Perfil} />
                 <Tab.Screen name="Notícias" component={Noticias} />
             </Tab.Navigator>

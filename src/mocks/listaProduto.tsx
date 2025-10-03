@@ -1,4 +1,3 @@
-import { useVideoPlayer, VideoView } from "expo-video";
 const lista_produto = {
     itens: {
         titulo: "Veja abaixo nossos produtos",
