@@ -14,6 +14,7 @@ import Perfil from "./src/telas/Perfil";
 import Noticias from "./src/telas/noticias";
 import Texto from "./src/componentes/Texto";
 import Styles from "./src/telas/estiloGeral";
+import ListaProdutos from "./src/telas/ListaProdutos";
 import { ListaDesejosProvider } from "./src/telas/ListaDeDesejos/Context";
 
 function MenuProdutos() {
@@ -22,6 +23,10 @@ function MenuProdutos() {
 
 function ListaDeDesejosScreen() {
     return <ListaDeDesejos />;
+}
+
+function ListaProdutosScreen() {
+    return <ListaProdutos />;
 }
 
 function ListaEncomendasScreen() {
@@ -68,6 +73,8 @@ function Menu() {
                             iconName = focused ? "newspaper" : "newspaper-outline";
                         }else if (route.name === "Encomendas") {
                             iconName = focused ? "cart" : "cart-outline";
+                        } else if (route.name === "Lista de Produtos") {
+                            iconName = focused ? 'car-sport' : 'car-sport-outline';
                         }
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
@@ -82,6 +89,7 @@ function Menu() {
                 <Tab.Screen name="Encomendas" component={ListaEncomendasScreen} />
                 <Tab.Screen name="Perfil" component={Perfil} />
                 <Tab.Screen name="Notícias" component={Noticias} />
+                <Tab.Screen name="Lista de Produtos" component={ListaProdutosScreen} />
             </Tab.Navigator>
     );
 }

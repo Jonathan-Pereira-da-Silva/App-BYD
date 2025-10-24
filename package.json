@@ -13,6 +13,7 @@
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-navigation/bottom-tabs": "^7.3.3",
     "@react-navigation/native": "^7.0.19",
+    "@supabase/supabase-js": "^2.76.1",
     "axios": "^1.12.2",
     "expo": "^53.0.23",
     "expo-audio": "^0.4.9",
