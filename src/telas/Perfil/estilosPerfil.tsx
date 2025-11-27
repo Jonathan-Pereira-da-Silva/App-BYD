@@ -29,7 +29,7 @@ camera: {
     width: 300,
     height: 200,
     alignSelf: 'center',
-    borderRadius: '10',
+    //borderRadius: '10',
     marginVertical: 30,
 },
 cameraContainer: {

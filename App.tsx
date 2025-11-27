@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFonts, Montserrat_700Bold, Montserrat_400Regular } from "@expo-google-fonts/montserrat";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAudioPlayer } from 'expo-audio';
@@ -9,13 +9,13 @@ import SobreNos from "./src/telas/SobreNos";
 import Produto from "./src/telas/Produtos";
 import MockProdutos from "./src/mocks/listaProduto";
 import ListaDeDesejos from "./src/telas/ListaDeDesejos";
-import ListaEncomendas from "./src/telas/ListaEncomendas";
 import Perfil from "./src/telas/Perfil";
 import Noticias from "./src/telas/noticias";
-import Texto from "./src/componentes/Texto";
 import Styles from "./src/telas/estiloGeral";
-import ListaProdutos from "./src/telas/ListaProdutos";
 import { ListaDesejosProvider } from "./src/telas/ListaDeDesejos/Context";
+
+import Texto from "./src/componentes/Texto";
+import ProdutosStack from "./src/navigation/ProdutosStack";
 
 function MenuProdutos() {
     return <Produto {...MockProdutos} />;
@@ -26,87 +26,114 @@ function ListaDeDesejosScreen() {
 }
 
 function ListaProdutosScreen() {
-    return <ListaProdutos />;
-}
-
-function ListaEncomendasScreen() {
-    return <ListaEncomendas {...MockProdutos}/>;
+  return <ProdutosStack />;
 }
 
 function MenuAudio(){
     const audioSource = require('./assets/acdc_highway_to_hell.mp3');
     const player = useAudioPlayer(audioSource);
-    
+
     const onOff = () => {
         if (player.playing) {
             player.pause();
         } else {
-            // Se o áudio terminou (currentTime >= duration), reiniciar
             if (player.currentTime >= player.duration) {
                 player.seekTo(0);
             }
             player.play();
         }
-    }
+    };
 
-    return <TouchableOpacity onPress={onOff}>
-        <Texto style={Styles.botaoAudio}>🎧On/Off</Texto>
-    </TouchableOpacity>
+    return (
+        <TouchableOpacity onPress={onOff}>
+            <Texto style={Styles.botaoAudio}>🎧On/Off</Texto>
+        </TouchableOpacity>
+    );
 }
 
-// Configuração do Menu
 const Tab = createBottomTabNavigator();
+
 function Menu() {
-    return (<Tab.Navigator
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName: string;
-                        if (route.name === "Sobre Nós") {
-                            iconName = focused ? 'home' : 'home-outline';
-                        } else if (route.name === "Produtos") {
-                            iconName = focused ? 'car-sport' : 'car-sport-outline';
-                        } else if (route.name === "Lista de Desejos") {
-                            iconName = focused ? 'list' : 'list-outline';
-                        } else if (route.name === "Perfil") {
-                            iconName = focused ? 'person-circle' : 'person-circle-outline';
-                        } else if (route.name === "Notícias") {
-                            iconName = focused ? "newspaper" : "newspaper-outline";
-                        }else if (route.name === "Encomendas") {
-                            iconName = focused ? "cart" : "cart-outline";
-                        } else if (route.name === "Lista de Produtos") {
-                            iconName = focused ? 'car-sport' : 'car-sport-outline';
-                        }
-                        return <Ionicons name={iconName} size={size} color={color} />;
-                    },
-                    tabBarActiveTintColor: '#252728',
-                    tabBarInactiveTintColor: 'gray',
-                    headerShown: false,
-                })}
-            >
-                <Tab.Screen name="Sobre Nós" component={SobreNos} />
-                <Tab.Screen name="Produtos" component={MenuProdutos} />
-                <Tab.Screen name="Lista de Desejos" component={ListaDeDesejosScreen} />
-                <Tab.Screen name="Encomendas" component={ListaEncomendasScreen} />
-                <Tab.Screen name="Perfil" component={Perfil} />
-                <Tab.Screen name="Notícias" component={Noticias} />
-                <Tab.Screen name="Lista de Produtos" component={ListaProdutosScreen} />
-            </Tab.Navigator>
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName = "home";
+
+                    if (route.name === "Sobre Nós") iconName = focused ? "home" : "home-outline";
+                    if (route.name === "Produtos (Local)") iconName = focused ? "car-sport" : "car-sport-outline";
+                    if (route.name === "Lista de Desejos") iconName = focused ? "list" : "list-outline";
+                    if (route.name === "Perfil") iconName = focused ? "person-circle" : "person-circle-outline";
+                    if (route.name === "Notícias") iconName = focused ? "newspaper" : "newspaper-outline";
+                    if (route.name === "Produtos (BD)") iconName = focused ? "server" : "server-outline";
+
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: '#252728',
+                tabBarInactiveTintColor: 'gray',
+                headerShown: false,
+                tabBarStyle: {
+                    backgroundColor: '#f8f9fa',
+                    borderTopWidth: 1,
+                    borderTopColor: '#e9ecef',
+                },
+            })}
+        >
+            <Tab.Screen 
+                name="Sobre Nós" 
+                component={SobreNos}
+                options={{ title: 'Sobre Nós' }}
+            />
+            <Tab.Screen 
+                name="Produtos (Local)" 
+                component={MenuProdutos}
+                options={{ title: 'Produtos' }}
+            />
+            <Tab.Screen 
+                name="Lista de Desejos" 
+                component={ListaDeDesejosScreen}
+                options={{ title: 'Desejos' }}
+            />
+            <Tab.Screen 
+                name="Perfil" 
+                component={Perfil}
+                options={{ title: 'Perfil' }}
+            />
+            <Tab.Screen 
+                name="Notícias" 
+                component={Noticias}
+                options={{ title: 'Notícias' }}
+            />
+            <Tab.Screen 
+                name="Produtos (BD)" 
+                component={ListaProdutosScreen}
+                options={{ title: 'Admin' }}
+            />
+        </Tab.Navigator>
     );
 }
 
 export default function App() {
-    // Configuração da fonte para o app
-    const [fonteCarregada] = useFonts({ "FonteRegular": Montserrat_400Regular, "FonteNegrito": Montserrat_700Bold });
-    // Verifica se a fonte foi carregada, se não, não exibe nada
+    const [fonteCarregada, fontError] = useFonts({
+        "FonteRegular": Montserrat_400Regular,
+        "FonteNegrito": Montserrat_700Bold,
+    });
+
     if (!fonteCarregada) {
-        return <View />;
+        if (fontError) {
+            console.error('Erro ao carregar fontes:', fontError);
+        }
+        return <View style={{ flex: 1, backgroundColor: '#252728' }} />;
     }
+
     return (
         <NavigationContainer>
             <ListaDesejosProvider>
-                <Menu />
+                <View style={{ flex: 1 }}>
+                    <Menu />
+                    <MenuAudio/>
+                </View>
             </ListaDesejosProvider>
-            <MenuAudio/>
         </NavigationContainer>
     );
 }
