@@ -103,29 +103,32 @@ export default function AdicionarProduto() {
       return;
     }
 
-    if (!imagemLocal) {
-      Alert.alert("Erro", "Selecione uma imagem para o produto.");
-      return;
-    }
-
     setUploading(true);
+    let urlImagem: string | null = null; // Inicializa a URL como null
 
     try {
-      console.log("Fazendo upload da imagem...");
-      const urlImagem = await uploadImagem(imagemLocal.uri);
-      
-      if (!urlImagem) {
-        setUploading(false);
-        return;
+      if (imagemLocal) { // Faz o upload SOMENTE SE houver uma imagem selecionada
+        console.log("Fazendo upload da imagem...");
+        urlImagem = await uploadImagem(imagemLocal.uri);
+        
+        if (!urlImagem) {
+          // Se o upload falhou, mas a imagem era opcional, 
+          // podemos decidir se queremos abortar ou continuar sem imagem.
+          // Vamos abortar se o upload foi tentado e falhou.
+          setUploading(false);
+          return; 
+        }
       }
 
       console.log("Inserindo no banco...");
+      
+      // O campo `imagem` receberá a URL ou `null` (se urlImagem for null)
       const { data, error } = await supabase
         .from("produtos")
         .insert({
           nome: nome.trim(),
           valor_unit: parseFloat(valor),
-          imagem: urlImagem,
+          imagem: urlImagem, // Pode ser uma URL ou null
         })
         .select();
 

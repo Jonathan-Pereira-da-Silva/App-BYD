@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, StatusBar, Image, Modal, TouchableOpacity, Alert } from 'react-native';
 import { supabase } from '../../../utils/supabase';
 import { Card } from 'react-native-paper';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { ProdutosStackParamList, ProdutoType } from "../../navigation/tiposProdutosStack";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -22,9 +22,14 @@ export default function ListaProdutos() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  useEffect(() => {
-    carregarProdutos();
-  }, []);
+  useFocusEffect(
+    // O useCallback garante que a função de efeito só seja recriada quando suas dependências mudarem.
+    // Neste caso, ele só rodará quando a tela for focada.
+    useCallback(() => {
+      carregarProdutos();
+      // Você não precisa de dependências aqui, pois carregarProdutos não depende de props ou state voláteis.
+    }, [])
+  );
 
   const carregarProdutos = async () => {
     const { data, error } = await supabase
