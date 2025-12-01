@@ -4,7 +4,7 @@ import { TouchableOpacity, View, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAudioPlayer } from 'expo-audio';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import SobreNos from "./src/telas/SobreNos";
 import Produto from "./src/telas/Produtos";
 import MockProdutos from "./src/mocks/listaProduto";
@@ -67,7 +67,7 @@ function Menu() {
                     if (route.name === "Notícias") iconName = focused ? "newspaper" : "newspaper-outline";
                     if (route.name === "Produtos (BD)") iconName = focused ? "server" : "server-outline";
 
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return <Ionicons name={iconName as any} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: '#252728',
                 tabBarInactiveTintColor: 'gray',
